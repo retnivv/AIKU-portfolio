@@ -7,12 +7,14 @@ Stanford CS231n을 수강하면서 수행한 과제 기록과 개인 프로젝�
 
 ## 📁 폴더 구조
 
-- AIKU/
-  - cs231n/
-    - assignment1/
-      - svm.ipynb
-      - softmax.ipynb
-  - projects/  *(예정)*            
+<pre><code>AIKU-portfolio/
+├── cs231n/                # CS231n 과제 실습 폴더
+│   ├── assignment1/       # 과제 1: Linear Classifiers
+│   └── classifiers/       # 핵심 구현 코드 모듈
+├── projects/              # 개인 프로젝트 정리 (예정)
+├── README.md              # 메인 소개 문서
+└── .gitignore
+</code></pre>  
 
 ---
 
