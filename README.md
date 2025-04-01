@@ -1,6 +1,3 @@
-# AIKU-portfolio  
-A comprehensive AI learning portfolio for AIKU
-
 # AIKU 학회 준비 포트폴리오
 
 이 저장소는 AIKU 인공지능 학회 진입을 목표로 한 포트폴리오입니다.  
@@ -23,7 +20,7 @@ Stanford CS231n을 수강하면서 수행한 과제 기록과 개인 프로젝�
 
 - [x] CS231n Assignment1 - SVM  
 - [x] CS231n Assignment1 - Softmax  
-- [ ] CS231n Assignment2 - CNN (진행 예정) *(과제 예정)*  
+- [ ] CS231n Assignment2 - CNN (진행 예정)  
 - [ ] CS231n Assignment3       (진행 예정)  
 - [ ] 개인 프로젝트 구상 및 구현 (4월~5월)  
 
