@@ -1,6 +1,34 @@
+# Jupyter notebook 체크포인트 (자동 저장 백업)
 .ipynb_checkpoints/
+
+# Python 캐시 파일
 __pycache__/
 *.pyc
-.DS_Store
-.env
+*.pyo
+*.pyd
+
+# 가상환경 (만약 로컬에서 venv 쓴다면)
+.env/
 .venv/
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+
+# Colab 구글 드라이브 연결 흔적 (있을 경우)
+*.gdoc
+*.gsheet
+*.gslides
+
+# 로그 파일
+*.log
+
+# 파이썬 개발 툴 관련
+*.egg-info/
+.eggs/
+
+# VSCode 설정 (사용할 경우)
+.vscode/
+
+# 기타
+*.swp
