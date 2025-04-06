@@ -9,8 +9,9 @@ Stanford CS231n을 수강하면서 수행한 과제 기록과 개인 프로젝�
 
 <pre><code>AIKU-portfolio/
 ├── cs231n/                # CS231n 과제 실습 폴더
-│   ├── assignment1/       # 과제 1: Linear Classifiers
-│   └── classifiers/       # 핵심 구현 코드 모듈
+│   ├── assignment1/       # Linear_svm, Softmax, Two-Layer Net 
+│   ├── assignment2/       # 예정
+│   ├── assignment3/     	 # 예정
 ├── projects/              # 개인 프로젝트 정리 (예정)
 ├── README.md              # 메인 소개 문서
 └── .gitignore
@@ -20,8 +21,7 @@ Stanford CS231n을 수강하면서 수행한 과제 기록과 개인 프로젝�
 
 ## ✅ 진행 상황
 
-- [x] CS231n Assignment1 - SVM  
-- [x] CS231n Assignment1 - Softmax  
+- [x] CS231n Assignment1 - Linear_svm, Softmax, Two-Layer Net
 - [ ] CS231n Assignment2 - CNN (진행 예정)  
 - [ ] CS231n Assignment3       (진행 예정)  
 - [ ] 개인 프로젝트 구상 및 구현 (4월~5월)  
