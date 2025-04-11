@@ -11,16 +11,16 @@
 <pre><code>assignment1/
 ├── svm.ipynb                 # SVM classifier 실습 노트북
 ├── softmax.ipynb             # Softmax classifier 실습 노트북
-├── two_layer_net.ipynb             # Two-layer Net 실습 노트북
+├── two_layer_net.ipynb       # Two-layer Net 실습 노트북
 ├── README.md                 # 현재 문서
-└── ../py/           # classifier 및 layer 구현 코드
+└── ../py/                    # classifier 및 layer 구현 코드
     ├── linear_svm.py         # SVM loss 및 gradient 구현
     ├── softmax.py            # Softmax loss 및 gradient 구현
-    ├── fc_net.py            # Two-Layer Net 구현
-    ├── layer.py            # Affine, Relu 등 각종 Layer 구현
-    ├── layer_utils.py		# Affine+Relu Layer 구현
-    ├── optim.py            # SGD, Adam 등 Optimizer 구현
-    ├── solver.py            # 모델 학습 클래스
+    ├── fc_net.py             # Two-Layer Net 구현
+    ├── layer.py              # Affine, Relu 등 각종 Layer 구현
+    ├── layer_utils.py        # Affine+Relu Layer 구현
+    ├── optim.py              # SGD, Adam 등 Optimizer 구현
+    ├── solver.py             # 모델 학습 클래스
     └── linear_classifier.py  # 공통 기반 클래스 (SVM/Softmax 공통 로직)
 </code></pre>
 
