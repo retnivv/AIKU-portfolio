@@ -21,6 +21,7 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 
 ※ `py/` 폴더에는 핵심 구현 코드('.py' 파일)들이 들어있으며, `.ipynb` 파일에서 이를 import하여 사용합니다.
 ※ `figures/` 폴더 내의 이미지는 실습 과정 중 필요한 계산을 직접 수행하고 정리한 자료입니다.
+
 ---
 
 ## 📄 과제 개요
@@ -28,9 +29,13 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 ### 🟦 `BatchNormalization.ipynb` - Batch Normalization
 
 - **Batch Normalization 및 Layer Normalization 구현** (`layers.py`)
-- 실습 중 수기로 정리한 역전파 계산 그래프:
-  - ![BN backward pass 계산 그래프](https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward.jpg)
-  - ![BN alternative backward pass 계산 그래프](https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward_alt.jpg)
+- **실습 중 수기로 정리한 역전파 계산 그래프:**
+
+  **① BN backward pass 계산 그래프**  
+  ![BN backward pass 계산 그래프](https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward.jpg)
+
+  **② BN alternative backward pass 계산 그래프**  
+  ![BN alternative backward pass 계산 그래프](https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward_alt.jpg)
 
 ---
 
