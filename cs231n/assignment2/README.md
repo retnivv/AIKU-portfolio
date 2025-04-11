@@ -31,11 +31,9 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 - **Batch Normalization 및 Layer Normalization 구현** (`layers.py`)
 - **실습 중 수기로 정리한 역전파 계산 그래프:**
 
-  **① BN backward pass 계산 그래프**  
-  ![BN backward pass 계산 그래프](https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward.jpg)
-
-  **② BN alternative backward pass 계산 그래프**  
-  ![BN alternative backward pass 계산 그래프](https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward_alt.jpg)
+<details> <summary><strong>📌 BN backward pass 계산 그래프</strong></summary> <p align="center"> 
+<img src="https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward.jpg" width="500"/> </p> </details> <details> <summary><strong>📌 BN alternative backward pass 계산 그래프</strong></summary> <p align="center"> 
+<img src="https://github.com/retnivv/AIKU-portfolio/raw/main/cs231n/assignment2/image/batchnorm_backward_alt.jpg" width="500"/> </p> </details>
 
 ---
 
