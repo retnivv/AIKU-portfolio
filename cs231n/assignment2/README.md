@@ -8,10 +8,11 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 
 ## 📁 폴더 구조
 
-<pre><code>assignment2/
+<pre><code>
+assignment2/
 ├── README.md                 # 현재 문서
 ├── BatchNormalization.ipynb # Batch Normalization 실습 노트북
-├── Dropout.ipynb # Dropout 실습 노트북
+├── Dropout.ipynb            # Dropout 실습 노트북
 ├── ../py/                   # classifier 및 layer 구현 코드
 │   ├── fc_net.py            # Fully Connected Network 구현
 │   ├── layers.py            # Affine, Batchnorm, Dropout 등 각종 Layer 구현
@@ -38,9 +39,7 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 
 ---
 
-### 🟨 진행예정
-
-### 🟦 `Dropout.ipynb` - Dropout
+### 🟨 `Dropout.ipynb` - Dropout
 
 - **Dropout 계층의 forward & backward 구현** (`layers.py`)
 - **Dropout을 적용했을 때와 적용하지 않았을 때 small dataset으로 학습된 모델의 성능 비교**
