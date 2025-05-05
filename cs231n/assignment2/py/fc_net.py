@@ -180,6 +180,10 @@ class FullyConnectedNet(object):
             # relu
             layer_out, cache_temp = relu_forward(layer_out)
             cache.append(cache_temp)
+            # dropout
+            if self.use_dropout:
+                layer_out, cache_temp = dropout_forward(layer_out, self.dropout_param)
+                cache.append(cache_temp)
 
         # last layer
         scores, cache_temp = affine_forward(
@@ -222,6 +226,9 @@ class FullyConnectedNet(object):
         affine_backward(dL, cache.pop())
 
         for i in reversed(range(self.num_layers - 1)):
+            # dropout
+            if self.use_dropout:
+                grad = dropout_backward(grad, cache.pop()) 
             # relu
             grad = relu_backward(grad, cache.pop())
             # batch/layer norm

@@ -11,9 +11,10 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 <pre><code>assignment2/
 ├── README.md                 # 현재 문서
 ├── BatchNormalization.ipynb # Batch Normalization 실습 노트북
+├── Dropout.ipynb # Dropout 실습 노트북
 ├── ../py/                   # classifier 및 layer 구현 코드
 │   ├── fc_net.py            # Fully Connected Network 구현
-│   ├── layers.py            # Affine, Batchnorm 등 각종 Layer 구현
+│   ├── layers.py            # Affine, Batchnorm, Dropout 등 각종 Layer 구현
 │   ├── optim.py             # SGD, Adam 등 Optimizer 구현
 │   └── solver.py            # 모델 학습 클래스
 ├── ../figures/              # 관련 이미지
@@ -39,7 +40,10 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 
 ### 🟨 진행예정
 
-_(작성 중입니다)_
+### 🟦 `Dropout.ipynb` - Dropout
+
+- **Dropout 계층의 forward & backward 구현** (`layers.py`)
+- **Dropout을 적용했을 때와 적용하지 않았을 때 small dataset으로 학습된 모델의 성능 비교**
 
 ---
 
@@ -54,6 +58,8 @@ _(작성 중입니다)_
 - BatchNormalization.ipynb
   - BatchNorm의 역전파 계산과정
   - BatchNorm과 LayerNorm의 비교
+- Dropout.ipynb
+  - Dropout의 정규화 기능
 
 ---
 
