@@ -607,7 +607,32 @@ def conv_forward_naive(x, w, b, conv_param):
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
+    N, C, H, W = x.shape
+    F, C, HH, WW = w.shape
+
+    pad = (
+        (0,0),
+        (0,0),
+        (conv_param['pad'],conv_param['pad']),
+        (conv_param['pad'],conv_param['pad'])
+        )  # padding 설정
+
+    x_pad = np.pad(x, pad_width=pad, mode='constant', constant_values = 0)
+    x_pad = x_pad.reshape(N, 1, C, H + 2 * conv_param['pad'], W + 2 * conv_param['pad'])
+    w_reshaped = w.reshape(1, F, C, HH, WW) # 텐서 연산을 위해 차원 맞춰줌
+    H_out = 1 + (H + 2 * conv_param['pad'] - HH) // conv_param['stride']
+    W_out = 1 + (W + 2 * conv_param['pad'] - WW) // conv_param['stride']
+    out = np.zeros((N, F, H_out, W_out))
+
+    H_now = 0
+    for i in range(H_out):
+        W_now = 0
+        for j in range(W_out):
+            temp = x_pad[:,:,:, H_now : H_now + HH, W_now : W_now + WW] * w_reshaped
+            temp = np.sum(temp, axis=(2,3,4)).reshape(N,F,1,1)
+            out[:,:,i:i+1,j:j+1] = temp + b.reshape(1,F,1,1)
+            W_now += conv_param['stride']
+        H_now += conv_param['stride']
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
@@ -634,8 +659,64 @@ def conv_backward_naive(dout, cache):
     # TODO: Implement the convolutional backward pass.                        #
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+    x, w, b, conv_param = cache
+    N, C, H, W = x.shape
+    F, C, HH, WW = w.shape
 
-    pass
+    pad = (
+        (0,0),
+        (0,0),
+        (conv_param['pad'],conv_param['pad']),
+        (conv_param['pad'],conv_param['pad'])
+        )  # padding 설정
+
+    x_pad = np.pad(x, pad_width=pad, mode='constant', constant_values = 0)
+    x_pad = x_pad.reshape(N, 1, C, H + 2 * conv_param['pad'], W + 2 * conv_param['pad'])
+    w_reshaped = w.reshape(1, F, C, HH, WW) # 텐서 연산을 위해 차원 맞춰줌
+    H_out = 1 + (H + 2 * conv_param['pad'] - HH) // conv_param['stride']
+    W_out = 1 + (W + 2 * conv_param['pad'] - WW) // conv_param['stride']
+    out = np.zeros((N, F, H_out, W_out))
+
+    dx = np.zeros_like(x)
+    dx_pad = np.zeros((N, 1, C, H + 2 * conv_param['pad'], W + 2 * conv_param['pad']))
+    dw_reshaped = np.zeros((1, F, C, HH, WW))
+    db = np.zeros_like(b)
+
+    H_now = 0
+    for i in range(H_out):
+        W_now = 0
+        for j in range(W_out):
+            # forward 흐름의 역순으로 처리
+            # out[:,:,i:i+1,j:j+1] = temp + b.reshape(1,F,1,1)
+            db += np.sum(dout[:,:,i:i+1,j:j+1], axis=0).reshape(F,)
+
+            # temp = np.sum(temp, axis=(2,3,4)).reshape(N,F,1,1)
+            temp = dout[:,:,i:i+1,j:j+1].reshape(N,F,1,1,1)
+            temp = np.zeros((N, F, C, HH, WW)) + temp # broadcasting
+
+            # temp = x_pad[:,:,:, H_now : H_now + HH, W_now : W_now + WW] * w_reshaped
+            dw_reshaped += np.einsum(
+                'abdef,bcdef->acdef',
+                x_pad[:,:,:, H_now : H_now + HH, W_now : W_now + WW].transpose(1,0,2,3,4),
+                temp
+                )
+            dx_pad[:,:,:, H_now : H_now + HH, W_now : W_now + WW] += np.einsum(
+                'abdef,bcdef->acdef',
+                temp,
+                w_reshaped.transpose(1,0,2,3,4)
+                )
+            
+            W_now += conv_param['stride']
+        H_now += conv_param['stride']
+
+    dw = np.sum(dw_reshaped, axis=0)
+    dx_pad = np.sum(dx_pad, axis=1)
+    dx = dx_pad[
+        :,
+        :,
+        conv_param['pad']:conv_param['pad']+H, 
+        conv_param['pad']:conv_param['pad']+W
+        ]
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
@@ -670,7 +751,20 @@ def max_pool_forward_naive(x, pool_param):
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
+    N, C, H, W = x.shape
+    PH, PW, stride = (pool_param[key] for key in ['pool_height', 'pool_width', 'stride']) 
+    H_out = 1 + (H - PH) // stride
+    W_out = 1 + (W - PW) // stride
+    out = np.zeros((N, C, H_out, W_out))
+
+    H_now = 0
+    for i in range(H_out):
+        W_now = 0
+        for j in range(W_out):
+            temp = np.max(x[:, :, H_now : H_now + PH, W_now : W_now + PW], axis=(2,3))
+            out[:,:,i:i+1,j:j+1] = temp.reshape(N, C, 1, 1)
+            W_now += stride
+        H_now += stride
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
@@ -695,8 +789,32 @@ def max_pool_backward_naive(dout, cache):
     # TODO: Implement the max-pooling backward pass                           #
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+    
+    x, pool_param = cache
+    N, C, H, W = x.shape
+    PH, PW, stride = (pool_param[key] for key in ['pool_height', 'pool_width', 'stride']) 
+    H_out = dout.shape[2]
+    W_out = dout.shape[3]
 
-    pass
+    dx = np.zeros_like(x)
+
+    H_now = 0
+    for i in range(H_out):
+        W_now = 0
+        for j in range(W_out):
+            # < forward >
+            # shape of dout: (N, C, H_out, W_out)
+            # temp = np.max(x[:, :, H_now : H_now + PH, W_now : W_now + PW], axis=(2,3))
+            # out[:,:,i:i+1,j:j+1] = temp.reshape(N, C, 1, 1)
+            # argmax의 index는 정수여야 함. -> 평탄화해서 argmax 계산.
+            x_flat = x[:, :, H_now : H_now + PH, W_now : W_now + PW].reshape(N, C, -1)
+            index = np.argmax(x_flat, axis=2)
+            temp = np.zeros((N, C, PH * PW))
+            temp[np.arange(N).reshape(N,-1),np.arange(C),index] = 1
+            temp = temp.reshape(N, C, PH, PW)
+            dx[:, :, H_now : H_now + PH, W_now : W_now + PW] += dout[:,:,i:i+1,j:j+1] * temp
+            W_now += stride
+        H_now += stride
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
@@ -736,8 +854,12 @@ def spatial_batchnorm_forward(x, gamma, beta, bn_param):
     # Your implementation should be very short; ours is less than five lines. #
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-    pass
+    N, C, H, W = x.shape
+    x_flat = x.transpose(0, 2, 3, 1)
+    x_flat = x_flat.reshape(-1, C)
+    out, cache = batchnorm_forward(x_flat, gamma, beta, bn_param)
+    out = out.reshape(N, H, W, C)
+    out = out.transpose(0, 3, 1, 2)
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
@@ -770,7 +892,12 @@ def spatial_batchnorm_backward(dout, cache):
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
+    N, C, H, W = dout.shape
+    dout_flat = dout.transpose(0, 2, 3, 1)
+    dout_flat = dout_flat.reshape(-1, C)
+    dx, dgamma, dbeta = batchnorm_backward_alt(dout_flat, cache)
+    dx = dx.reshape(N, H, W, C)
+    dx = dx.transpose(0, 3, 1, 2)
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
@@ -811,7 +938,22 @@ def spatial_groupnorm_forward(x, gamma, beta, G, gn_param):
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
+    N, C, H, W = x.shape
+    x_normalized = x.reshape(N, G, C//G, H, W)
+    mean = np.sum(x_normalized, axis = (2,3,4), keepdims = True) / (C // G * H * W)
+    var = np.sum(
+        (x_normalized - mean) ** 2, 
+        axis = (2,3,4), 
+        keepdims = True
+        ) / (C // G * H * W)
+
+    x_normalized = (x_normalized - mean) / np.sqrt(var + eps)
+    x_normalized = x_normalized.reshape(N, C, H, W)
+
+    # 역전파 계산을 위해 normalized x 를 따로 저장.
+    cache = (x, x_normalized, gamma, beta, mean, var, eps, G) 
+
+    out = gamma * x_normalized + beta
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################
@@ -840,7 +982,25 @@ def spatial_groupnorm_backward(dout, cache):
     ###########################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
+    x, x_normalized, gamma, beta, mean, var, eps, G = cache
+
+    N, C, H, W = dout.shape
+
+    dgamma = np.sum(dout * x_normalized, axis = (0,2,3), keepdims = True)
+    dbeta = np.sum(dout, axis = (0,2,3), keepdims = True)
+    dx_normalized = dout * gamma
+    dx_normalized = dx_normalized.reshape(N, G, C//G, H, W)
+    x_normalized = x_normalized.reshape(N, G, C//G, H, W)
+
+    D = C // G * H * W
+
+    dx = (1 / (D * np.sqrt(var + eps))) * (
+        D * dx_normalized 
+        - np.sum(dx_normalized, axis = (2,3,4), keepdims = True)
+        - x_normalized * np.sum(x_normalized * dx_normalized, axis = (2,3,4), 
+                                keepdims = True)
+    )
+    dx = dx.reshape(N, C, H, W)
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     ###########################################################################

@@ -10,15 +10,19 @@ PyTorch를 활용한 모델 학습 실습 과정을 포함합니다.
 
 <pre><code>
 assignment2/
-├── README.md                 # 현재 문서
-├── BatchNormalization.ipynb # Batch Normalization 실습 노트북
-├── Dropout.ipynb            # Dropout 실습 노트북
-├── ../py/                   # classifier 및 layer 구현 코드
-│   ├── fc_net.py            # Fully Connected Network 구현
-│   ├── layers.py            # Affine, Batchnorm, Dropout 등 각종 Layer 구현
-│   ├── optim.py             # SGD, Adam 등 Optimizer 구현
-│   └── solver.py            # 모델 학습 클래스
-├── ../figures/              # 관련 이미지
+├── README.md                        # 현재 문서
+├── BatchNormalization.ipynb        # Batch Normalization 실습 노트북
+├── Dropout.ipynb                   # Dropout 실습 노트북
+├── ConvolutionalNetworks.ipynb     # CNN 실습 노트북
+├── ../py/                          # classifier 및 layer 구현 코드
+│   ├── fc_net.py                   # Fully Connected Network 구현
+│   ├── layers.py                   # Affine, Batchnorm, Dropout 등 각종 Layer 구현
+│   ├── cnn.py                      # Three Layer CNN 구현
+│   ├── optim.py                    # SGD, Adam 등 Optimizer 구현
+│   ├── layer_utils.py              # Affine+Relu 등 각종 편의성 Layer 모듈
+│   ├── fast_layers.py              # 빠른 버전의 Convolutional Layer 모듈
+│   └── solver.py                   # 모델 학습 클래스
+├── ../figures/                     # 관련 이미지
 </code></pre>
 
 ※ `py/` 폴더에는 핵심 구현 코드('.py' 파일)들이 들어있으며, `.ipynb` 파일에서 이를 import하여 사용합니다.
@@ -46,9 +50,11 @@ assignment2/
 
 ---
 
-### 🟥 진행예정
+### 🟥 `ConvolutionalNetworks.ipynb` - CNN
 
-_(작성 중입니다)_ 
+- **Convolutional layer forward & backward 구현** (`layers.py`)
+- **Three Layer CNN 구현** (`cnn.py`)
+- **(+) Spatial Batch Normalization, Spatial Group Normalization 구현** (`layers.py`)
 
 ---
 
@@ -59,7 +65,9 @@ _(작성 중입니다)_
   - BatchNorm과 LayerNorm의 비교
 - Dropout.ipynb
   - Dropout의 정규화 기능
-
+- ConvolutionalNetworks.ipynb
+  - Convolutional layer의 (naive) forward, backward 계산 과정
+  - Spatial Batch Normalization, Spatial Group Normalization과 BatchNorm, LayerNorm의 비교
 ---
 
 ## ✍️ 기타 정보
