@@ -7,32 +7,33 @@ Stanford CS231n을 수강하면서 수행한 과제 기록과 개인 프로젝�
 
 ## 📁 폴더 구조
 
-<pre><code>AIKU-portfolio/
+<pre><code>
+AIKU-portfolio/
 ├── cs231n/                # CS231n 과제 실습 폴더
 │   ├── assignment1/       # Linear_svm, Softmax, Two-Layer Net 
-│   ├── assignment2/       # 예정
-│   ├── assignment3/     	# 예정
+│   ├── assignment2/       # Multi-Layer Fully Connected Network, Batch normalization, Dropout, CNN
+│   ├── assignment3/       # 예정
 ├── projects/              # 개인 프로젝트 정리 (예정)
 ├── README.md              # 메인 소개 문서
 └── .gitignore
-</code></pre>  
+</code></pre>
 
 ---
 
 ## ✅ 진행 상황
 
 - [x] CS231n Assignment1 - Linear_svm, Softmax, Two-Layer Net
-- [ ] CS231n Assignment2 - CNN (진행 예정)  
+- [x] CS231n Assignment2 - Multi-Layer Fully Connected Network, Batch normalization, Dropout, CNN
 - [ ] CS231n Assignment3       (진행 예정)  
-- [ ] 개인 프로젝트 구상 및 구현 (4월~5월)  
+- [ ] 개인 프로젝트 구상 및 구현 (5월~6월)  
 
 ---
 
 ## ✍️ 작성자 정보
 
-- 전공: 수학교육과 / 인공지능 융합전공 준비 중
+- 전공: 수학교육과 / 인공지능 융합전공 진입 예정 (2025-2)
 - 학습 경험:
-  - 이론: CS229, 밑바닥부터 딥러닝, Udemy 강의
+  - 이론: CS229, 밑바닥부터 딥러닝, Udemy 강의, CS231n
   - 실습: 타이타닉(Kaggle), CS231n Assignments
 
 ---
