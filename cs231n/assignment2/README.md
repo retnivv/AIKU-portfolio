@@ -14,13 +14,14 @@ assignment2/
 ├── BatchNormalization.ipynb        # Batch Normalization 실습 노트북
 ├── Dropout.ipynb                   # Dropout 실습 노트북
 ├── ConvolutionalNetworks.ipynb     # CNN 실습 노트북
+├── PyTorch.ipynb                   # PyTorch 실습 노트북 ⭐️
 ├── ../py/                          # classifier 및 layer 구현 코드
 │   ├── fc_net.py                   # Fully Connected Network 구현
-│   ├── layers.py                   # Affine, Batchnorm, Dropout 등 각종 Layer 구현
+│   ├── layers.py                   # Affine, Batchnorm, Dropout 등 Layer 구현
 │   ├── cnn.py                      # Three Layer CNN 구현
 │   ├── optim.py                    # SGD, Adam 등 Optimizer 구현
-│   ├── layer_utils.py              # Affine+Relu 등 각종 편의성 Layer 모듈
-│   ├── fast_layers.py              # 빠른 버전의 Convolutional Layer 모듈
+│   ├── layer_utils.py              # Affine+ReLU 등 조합 레이어 편의 모듈
+│   ├── fast_layers.py              # 고속 Convolution Layer 모듈
 │   └── solver.py                   # 모델 학습 클래스
 ├── ../figures/                     # 관련 이미지
 </code></pre>
@@ -58,6 +59,18 @@ assignment2/
 
 ---
 
+### 🟩⭐️ `PyTorch.ipynb` - Pytorch (Final Project : CIFAR-10 classification)
+
+- **PyTorch 사용법 학습**
+- **PyTorch를 활용하여 CIFAR-10 이미지셋 분류 작업 수행**
+- **최종 모델 성능**
+  - Best Validation Accuracy ≈ `0.85`
+  - Test Accuracy ≈ `0.83`
+- **모델 구조**  
+   - 5개의 Residual Block (Conv-BN-ReLU 포함) + FC 2층 + Softmax  
+   - Dropout 및 L2 정규화 적용
+
+
 ## 🧠 학습/실험 중 깨달은 점
 
 - BatchNormalization.ipynb
@@ -68,6 +81,11 @@ assignment2/
 - ConvolutionalNetworks.ipynb
   - Convolutional layer의 (naive) forward, backward 계산 과정
   - Spatial Batch Normalization, Spatial Group Normalization과 BatchNorm, LayerNorm의 비교
+- PyTorch.ipynb
+  - PyTorch 사용법
+  - nn.Module vs nn.Sequential
+  - Residual Network PyTorch로 구현
+
 ---
 
 ## ✍️ 기타 정보
