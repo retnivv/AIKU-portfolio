@@ -4,7 +4,7 @@ This repository contains my assignment work and study notes from **Stanford CS23
 
 ---
 
-## 📁 Repository Structure
+## 📁 Directory Structure
 
 <pre><code>
 CS231n/
