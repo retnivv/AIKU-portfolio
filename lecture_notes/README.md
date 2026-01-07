@@ -1,11 +1,12 @@
 # 📘 CS231n Lecture Notes  
 
-이 폴더는 Stanford CS231n의 후반부 강의(10, 11, 13, 14강)에 대한 정리노트를 기록한 공간입니다.  
-과제3의 다운로드 링크 손상으로 인해 과제 수행이 어려워 해당 진도 내용을 정리노트 작성으로 대체하였습니다.  
+This folder contains my lecture notes for the later part of **Stanford CS231n**, covering Lectures 10, 11, 13, and 14.
+
+Due to an issue with the official download link for Assignment 3, the corresponding course content is instead summarized in the form of lecture notes.
 
 ---
 
-## 📁 폴더 구조
+## 📁 Directory Structure
 
 <pre><code>
 lecture-notes/
@@ -19,5 +20,6 @@ lecture-notes/
 
 ## 📝 참고
 
-> 모든 노트는 직접 강의를 수강하며 노션에 정리했던 내용을 Markdown 파일로 변환하여 옮긴 것입니다.  
-> 이미지 파일은 각 강의 폴더 내에 함께 포함되어 있습니다.  
+- All notes were originally written during the lectures and later converted from Notion into Markdown format.  
+- Figures and images used in the notes are included within each lecture directory.
+  
